@@ -21,7 +21,7 @@ export class GoogleAuth extends React.Component {
 
     onAuthChange = (isSignedIn) => { // => function will automatically bind this function
         if (isSignedIn) {
-            this.props.signIn();
+            this.props.signIn(this.auth.currentUser.get().getId());
         } else {
             this.props.signOut();
         };
