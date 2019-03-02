@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions/';
 
 class StreamCreate extends React.Component {
     renderError = ({ error, touched }) => {
@@ -13,7 +15,7 @@ class StreamCreate extends React.Component {
     }
 
     renderInput = ({ input, label, meta }) => {//deconstructure formProps
-        const className = `field ${meta.error&&meta.touched ? 'error' : ''}`;
+        const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
         return (
             <div className={className}>
                 <label>{label}</label>
@@ -25,8 +27,8 @@ class StreamCreate extends React.Component {
 
     onSubmit = (formValues) => {//because redux-form (handleSubmit) takes care of 'event', this function will not receive 'event' anymore
         //e.preventDefault(); not necessary anymore because of redux-form (this.props.handleSubmit) takes care of it 
-        console.log(formValues);
-    }
+        this.props.createStream(formValues);
+    };
 
     render() {
         return (
@@ -52,9 +54,11 @@ const validate = (formValues) => {
     return error;
 }
 
-export default reduxForm(
+const formWrapped = reduxForm(
     {
         form: 'streamCreate',//form name
         validate //same as {validate: validate},provide the function for validation and formValues are passed in as args, 
     }
 )(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped); //connect() is the outer function
