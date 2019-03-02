@@ -24,8 +24,8 @@ class StreamCreate extends React.Component {
     }
 
     onSubmit = (formValues) => {//because redux-form (handleSubmit) takes care of 'event', this function will not receive 'event' anymore
-        //e.preventDefault(); not necessary anymore because of redux-for (this.props.handleSubmit) takes care of it 
-        // console.log(formValues);
+        //e.preventDefault(); not necessary anymore because of redux-form (this.props.handleSubmit) takes care of it 
+        console.log(formValues);
     }
 
     render() {
@@ -41,6 +41,7 @@ class StreamCreate extends React.Component {
 }
 
 const validate = (formValues) => {
+    console.log(formValues);
     const error = {};
     if (!formValues.title) {
         error.title = "You must enter a title";
