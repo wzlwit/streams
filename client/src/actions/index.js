@@ -28,7 +28,7 @@ export const createStream = formvalues => async (dispatch, getState) => {
     const response = await streams.post('/streams', { ...formvalues, userId }); //add userid to formvalues
     dispatch({ type: CREATE_STREAM, payload: response.data });
     //do some programmatic navigation to get the user back to the root route
-    history.push('/');// ' ' to showthe url we want to go to
+    history.push('/');// ' ' to show the url we want to go to
 }
 
 export const fetchStreams = () => async dispatch => {
@@ -42,8 +42,9 @@ export const fetchStream = (id) => async dispatch => {
 }
 
 export const editStream = (id, formvalues) => async dispatch => {
-    const response = await streams.put(`/streams/${id}`, formvalues);
+    const response = await streams.patch(`/streams/${id}`, formvalues);
     dispatch({ type: EDIT_STREAM, payload: response.data });
+    history.push('/');
 }
 export const deleteStream = id => async dispatch => {
     await streams.delete(`/streams/${id}`);
